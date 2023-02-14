@@ -1867,7 +1867,7 @@ class DeepSpeedEngine(Module):
             for k, v in inputs.items():
                 new_inputs[k] = self._cast_inputs_half(v)
             return new_inputs
-        elif hasattr(inputs, 'half'):
+        elif torch.is_floating_point(inputs) and hasattr(inputs, 'half'):
             return inputs.half()
         else:
             return inputs
